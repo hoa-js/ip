@@ -142,22 +142,24 @@ describe('ip middleware', () => {
       expect(res.status).toBe(403)
     })
 
-    it('returns 403 when IP is undefined and denyHandler is null', async () => {
+    it('throws TypeError when denyHandler is not a function (null)', () => {
       const app = new Hoa()
-      app.use(ip({ getIp: () => undefined, denyHandler: null }))
-      app.use(async (ctx) => { ctx.res.body = 'never' })
-
-      const res = await app.fetch(new Request('http://localhost/no-ip-throw'))
-      expect(res.status).toBe(403)
+      expect(() => app.use(ip({ getIp: () => undefined, denyHandler: null }))).toThrow('denyHandler must be a function')
     })
 
-    it('returns 403 when IP is empty string and denyHandler is non-function', async () => {
+    it('throws TypeError when denyHandler is not a function (number)', () => {
       const app = new Hoa()
-      app.use(ip({ getIp: () => '', denyHandler: 0 }))
-      app.use(async (ctx) => { ctx.res.body = 'never' })
+      expect(() => app.use(ip({ getIp: () => '', denyHandler: 0 }))).toThrow('denyHandler must be a function')
+    })
 
-      const res = await app.fetch(new Request('http://localhost/no-ip-empty'))
-      expect(res.status).toBe(403)
+    it('throws TypeError when denyHandler is not a function (null)', () => {
+      const app = new Hoa()
+      expect(() => app.use(ip({ getIp: () => undefined, denyHandler: null }))).toThrow('denyHandler must be a function')
+    })
+
+    it('throws TypeError when denyHandler is not a function (number)', () => {
+      const app = new Hoa()
+      expect(() => app.use(ip({ getIp: () => '', denyHandler: 0 }))).toThrow('denyHandler must be a function')
     })
   })
 

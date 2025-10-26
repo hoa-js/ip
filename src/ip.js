@@ -119,6 +119,9 @@ export function ip (options = {}) {
   if (!Array.isArray(denyList)) {
     throw new TypeError('denyList must be an array')
   }
+  if (typeof denyHandler !== 'function') {
+    throw new TypeError('denyHandler must be a function')
+  }
 
   const allowLength = allowList.length
   const allowMatcher = buildMatcher(allowList)
@@ -127,8 +130,8 @@ export function ip (options = {}) {
   return async function ipMiddleware (ctx, next) {
     const addr = getIp(ctx)
     if (!addr) {
-      if (typeof denyHandler === 'function') return await denyHandler(ctx)
-      ctx.throw(403, 'Forbidden')
+      await denyHandler(ctx)
+      return
     }
 
     const type = distinctRemoteAddr(addr)

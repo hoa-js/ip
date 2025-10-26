@@ -1,6 +1,6 @@
 {
   "name": "@hoajs/ip",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "IP restriction middleware for Hoa.",
   "main": "./dist/cjs/ip.js",
   "type": "module",
