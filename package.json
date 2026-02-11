@@ -1,17 +1,17 @@
 {
   "name": "@hoajs/ip",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "IP restriction middleware for Hoa.",
-  "main": "./dist/cjs/ip.js",
+  "main": "./dist/cjs/ip.cjs",
   "type": "module",
-  "module": "./dist/esm/ip.js",
+  "module": "./dist/esm/ip.mjs",
   "types": "./types/index.d.ts",
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
-      "import": "./dist/esm/ip.js",
-      "require": "./dist/cjs/ip.js",
-      "default": "./dist/esm/ip.js"
+      "import": "./dist/esm/ip.mjs",
+      "require": "./dist/cjs/ip.cjs",
+      "default": "./dist/esm/ip.mjs"
     }
   },
   "files": [
@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "build": "tsup",
+    "build": "tsdown",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
     "prepare": "husky"
@@ -40,15 +40,15 @@
     "filter"
   ],
   "devDependencies": {
-    "@commitlint/cli": "20.1.0",
-    "@commitlint/config-conventional": "20.0.0",
-    "eslint": "9.38.0",
-    "globals": "16.4.0",
+    "@commitlint/cli": "20.4.1",
+    "@commitlint/config-conventional": "20.4.1",
+    "eslint": "9.39.2",
+    "globals": "17.3.0",
     "hoa": "*",
     "husky": "9.1.7",
     "jest": "30.2.0",
     "neostandard": "0.12.2",
-    "tsup": "8.5.0"
+    "tsdown": "^0.20.3"
   },
   "peerDependencies": {
     "hoa": "*"
